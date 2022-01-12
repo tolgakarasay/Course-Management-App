@@ -1,0 +1,32 @@
+{
+  "name": "course_management_system",
+  "version": "1.0.0",
+  "description": "course management app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolgakarasay/Course-Management-App.git"
+  },
+  "keywords": [
+    "education",
+    "learning",
+    "management",
+    "portal",
+    "node.js"
+  ],
+  "author": "Tolga Karasay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tolgakarasay/Course-Management-App/issues"
+  },
+  "homepage": "https://github.com/tolgakarasay/Course-Management-App#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
