@@ -5,6 +5,7 @@ const courseRoute = require('./routes/courseRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const userRoute = require('./routes/userRoute');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(
     secret: 'my_keyboard_cat', // Buradaki texti değiştireceğiz.
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/course-db' }),
   })
 );
 

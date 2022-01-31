@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { redirect } = require('express/lib/response');
 const User = require('../models/User');
 
 exports.createUser = async (req, res) => {
@@ -32,27 +33,8 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-/* exports.getAllCategorys = async (req, res) => {
-  try {
-    const categorys = await Category.find();
-    res.status(200).render('categorys', { categorys, page_name: 'categorys' });
-  } catch (error) {
-    res.status(400).json({
-      status: 'failed',
-      error,
-    });
-  }
+exports.logoutUser = async (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 };
-
-exports.getCategory = async (req, res) => {
-  try {
-    const category = await Category.findOne({ slug: req.params.slug });
-    res.status(200).render('category', { category, page_name: 'categorys' });
-  } catch (error) {
-    res.status(400).json({
-      status: 'failed',
-      error,
-    });
-  }
-};
- */
