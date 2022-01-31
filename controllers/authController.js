@@ -24,7 +24,7 @@ exports.loginUser = async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       req.session.userID = user._id;
-      res.status(200).redirect('/');
+      res.status(200).redirect('dashboard');
     } else {
       res.status(400).send('Kullanıcı adı veya şifre hatalı!!!');
     }
@@ -36,5 +36,14 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = async (req, res) => {
   req.session.destroy(() => {
     res.redirect('/');
+  });
+};
+
+exports.getDashboardPage = async (req, res) => {
+  const user = await User.findOne({ _id: req.session.userID });
+
+  res.status(200).render('dashboard', {
+    page_name: 'dashboard',
+    user,
   });
 };
