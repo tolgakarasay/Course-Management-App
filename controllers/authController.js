@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 exports.createUser = async (req, res) => {
@@ -12,6 +13,22 @@ exports.createUser = async (req, res) => {
       status: 'failed',
       error,
     });
+  }
+};
+
+exports.loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      req.session.userID = user._id;
+      res.status(200).redirect('/');
+    } else {
+      res.status(400).send('Kullanıcı adı veya şifre hatalı!!!');
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
